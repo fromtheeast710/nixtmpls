@@ -6,7 +6,7 @@
     nixpkgs.follows = "nix-ros-overlay/nixpkgs";
   };
 
-  outputs = { ros-overlay, nixpkgs }:
+  outputs = { self, ros-overlay, nixpkgs }:
     ros-overlay.inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {

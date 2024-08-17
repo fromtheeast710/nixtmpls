@@ -34,6 +34,10 @@
           path = ./python/ros;
           description = "Nix Flake for ROS Humble development";
         };
+        jupyter = {
+          path = ./python/jupyter;
+          description = "Nix Flake for Jupyter notebooks";
+        };
       };
       svelte = {
         path = ./svelte;

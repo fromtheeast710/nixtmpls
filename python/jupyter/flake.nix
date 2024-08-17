@@ -1,5 +1,5 @@
 {
-  description = "Personal Website";
+  description = "Nix Flake for Jupyter Notebooks";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -8,10 +8,12 @@
     pkgs = import nixpkgs { inherit system; };
   in with pkgs; {
     devShells.${system}.default = mkShell {
+      venvDir = ".venv";
       packages = [
-        nodejs-slim_22
-        pnpm
-      ];
+        python3
+      ] ++ (with python3Packages; [ 
+        jupyter-core 
+      ]);
     };
   };
 }
