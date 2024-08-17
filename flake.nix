@@ -10,7 +10,8 @@
           ## Usage
 
           After initialization, execute:
-          ```sh
+
+          ```
           cargo init
           ```
           '';
@@ -22,7 +23,7 @@
           # Template Tauri project
           ## Usage
 
-          After initialization, use pnpm to setup Tauri/Svelte
+          After initialization, use pnpm to setup Tauri+Svelte
 
           ## Build will be available soon
           '';
