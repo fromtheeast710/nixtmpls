@@ -20,6 +20,10 @@
           description = "Flake for Tauri development";
           welcomeText = ''
           # Template Tauri project
+          ## Usage
+
+          After initialization, use pnpm to setup Tauri/Svelte
+
           ## Build will be available soon
           '';
         };
