@@ -5,9 +5,8 @@
 
   outputs = { self, nixpkgs }: let
     system = "x86_64-linux";
-  in with nixpkgs.legacyPackages.${system}; {
-    devShells.${system}.default = mkShell {
-      packages = [ typst ];
-    };
+    pkgs = nixpkgs.legacyPackages.${system};
+  in with pkgs; pkgs.mkShell {
+    packages = [ typst typstyle ];
   };
 }

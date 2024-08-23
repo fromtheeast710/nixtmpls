@@ -7,9 +7,7 @@
     system = "x86_64-linux";
 
     pkgs = import nixpkgs { inherit system; };
-  in with pkgs; {
-    devShells.${system}.default = mkShell {
-      packages = [ ocaml ocamlformat ] ++ (with ocamlPackages; [ dune_3 odoc ]);
-    };
+  in with pkgs; pkgs.mkShell {
+    packages = [ ocaml ocamlformat ] ++ (with ocamlPackages; [ dune_3 ]);
   };
 }

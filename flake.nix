@@ -33,6 +33,12 @@
         ros = {
           path = ./python/ros;
           description = "Nix Flake for ROS Humble development";
+          welcomeText = ''
+          # Template ROS Humble project
+          ## Source
+
+          Modified from `https://github.com/lopsided98/nix-ros-overlay/`
+          '';
         };
         jupyter = {
           path = ./python/jupyter;
@@ -52,6 +58,10 @@
       typst = {
         path = ./typst;
         description = "Flake for Typst notes";
+      };
+      ocaml = {
+        path = ./ocaml;
+        description = "Flake for OCaml development";
       };
     };
   };

@@ -13,17 +13,15 @@
           inherit system;
           overlays = [ ros-overlay.overlays.default ];
         };
-      in with pkgs; {
-        devShells.default = mkShell {
-          name = "Example project";
-          packages = [
-            colcon
+      in with pkgs; pkgs.mkShell {
+        name = "Example project";
+        packages = [
+          colcon
 
-            (with rosPackages.humble; buildEnv {
-              paths = [
-                ros-core
-              ];
-            })
-          ] ++ (with python3Packages; [ ]);
-        };});
+          (with rosPackages.humble; buildEnv {
+            paths = [
+              ros-core
+            ];})
+        ] ++ (with python3Packages; [ numpy ]);
+      });
 }
