@@ -13,7 +13,7 @@
           inherit system;
           overlays = [ ros-overlay.overlays.default ];
         };
-      in with pkgs; pkgs.mkShell {
+      in with pkgs; { devShells.default = pkgs.mkShell {
         name = "Example project";
         packages = [
           colcon
@@ -23,5 +23,5 @@
               ros-core
             ];})
         ] ++ (with python3Packages; [ numpy ]);
-      });
+      };});
 }

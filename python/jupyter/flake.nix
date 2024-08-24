@@ -6,12 +6,12 @@
   outputs = { self, nixpkgs }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
-  in with pkgs; pkgs.mkShell {
+  in with pkgs; { devShells.${system}.default = mkShell {
     venvDir = ".venv";
     packages = [
       python3
     ] ++ (with python3Packages; [ 
       jupyter-core 
     ]);
-  };
+  };};
 }
