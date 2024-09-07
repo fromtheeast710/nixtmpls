@@ -8,6 +8,11 @@
 
     pkgs = import nixpkgs { inherit system; };
   in with pkgs; { devShells.${system}.default = mkShell {
-    packages = [ ocaml ocamlformat ] ++ (with ocamlPackages; [ dune_3 ]);
+    packages = [
+      ocaml
+      ocamlformat
+    ] ++ (with ocamlPackages; [
+      dune_3
+    ]);
   };};
 }
