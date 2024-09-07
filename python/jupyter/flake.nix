@@ -9,9 +9,14 @@
   in with pkgs; { devShells.${system}.default = mkShell {
     venvDir = ".venv";
     packages = [
-      python3
-    ] ++ (with python3Packages; [ 
-      jupyter-core 
-    ]);
+      (python3.withPackages(ps: with ps; [
+        numpy
+        polars
+        plotly
+        notebook
+      ]))
+    ];
+
+    shellHook = "jupyter notebook --no-browser > /dev/null 2>&1 &";
   };};
 }
