@@ -1,5 +1,5 @@
 {
-  description = "Nix Flake for Rust development";
+  description = "Nix Flake for Dioxus development";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -16,7 +16,14 @@
 
     rust = pkgs.rust-bin.fromRustupToolchainFile ./Toolchain.toml;
 
-    builder = { lib, rustPlatform }: let
+    builder =
+    { lib
+    , glib
+    , gtk3
+    , xdotool
+    , webkitgtk_4_1
+    , pkg-config
+    , rustPlatform }: let
       toml = (lib.importTOML ./Cargo.toml).package;
     in rustPlatform.buildRustPackage {
       inherit (toml) version;
@@ -24,6 +31,15 @@
       pname = toml.name;
       src = ./.;
       cargoLock.lockFile = ./Cargo.lock;
+
+      buildInputs = [
+        glib
+        gtk3
+        xdotool
+        webkitgtk_4_1
+      ];
+
+      nativeBuildInputs = [ pkg-config ];
 
       meta.mainProgram = "NameOfPkg";
     };
@@ -38,8 +54,19 @@
         rust
         rust-analyzer-unwrapped
         rust-bin.nightly."2024-04-07".rustfmt
+        dioxus-cli
       ];
-      RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library";
+
+      buildInputs = [
+        gtk3
+        xdotool
+        libsoup_3
+      ];
+
+      env = {
+        RUST_SRC_PATH="${rust}/lib/rustlib/src/rust/library";
+        PKG_CONFIG_PATH="${webkitgtk_4_1.dev}/lib/pkgconfig";
+      };
     };
   };
 }

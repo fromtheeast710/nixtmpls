@@ -21,6 +21,7 @@
           (with rosPackages.humble; buildEnv {
             paths = [
               ros-core
+              rqt-gui
             ];})
         ] ++ (with python3Packages; [ numpy ]);
       };});

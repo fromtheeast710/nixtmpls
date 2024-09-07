@@ -8,5 +8,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in with pkgs; { devShells.${system}.default = mkShell {
     packages = [ typst typstyle ];
+    
+    shellHook = "typst c ./NOTE.typ && clear";
   };};
 }

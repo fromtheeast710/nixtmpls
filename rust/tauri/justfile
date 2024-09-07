@@ -20,7 +20,7 @@ l:
 
 # update
 u:
-	pnpm update
+	pnpm update && nix flake update
 
 # build release
 b:

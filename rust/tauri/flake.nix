@@ -17,8 +17,69 @@
         overlays = [ nixgl-overlay.overlay rust-overlay.overlays.default ];
       }));
 
-    #TODO: not yet finished
-    builder = { };
+    # NOTE: cargo-tauri.hook is not yet merged
+    builder =
+    { lib
+    , stdenv
+    , pnpm
+    , darwin
+    , libsoup
+    , openssl
+    , webkitgtk
+    , pkg-config
+    , cargo-tauri
+    , nodejs-slim_22
+    , glib-networking
+    , rustPlatform
+    , wrapGAppsHook3
+    }: let
+      src = ./.;
+      toml = (lib.importTOML ./src-tauri/Cargo.toml).package;
+    in rustPlatform.buildRustPackage rec {
+      inherit src;
+      inherit (toml) version;
+
+      pname = toml.name;
+
+      cargoRoot = "src-tauri";
+      cargoLock.lockFile = "${src}/src-tauri/Cargo.lock";
+      buildAndTestSubdir = cargoRoot;
+
+      pnpmDeps = pnpm.fetchDeps {
+        inherit pname version src;
+        hash = "sha256-bSYTms8zgGMIUrQIIz9tTNvvTk4LtH8bPEkC/1fihlk=";
+      };
+
+      nativeBuildInputs = [
+        pkg-config
+        nodejs-slim_22
+        wrapGAppsHook3
+        pnpm.configHook
+        cargo-tauri.hook
+      ];
+
+      buildInputs =
+        [ openssl ]
+        ++ lib.optionals stdenv.isLinux [
+          libsoup
+          webkitgtk
+          glib-networking
+        ]
+        ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
+          AppKit
+          WebKit
+          Security
+          CoreServices
+        ]);
+
+      meta = {
+        description = "";
+        homepage = "";
+        license = lib.licenses.gpl3;
+        mainProgram = "NameOfPkg";
+        platforms = [ "x86_64-linux" ];
+      };
+    };
   in {
     packages = allSystems (pkgs: with pkgs; {
       NameOfPkg = callPackage builder { };
@@ -33,6 +94,7 @@
           rust
           rust-analyzer-unwrapped
           rust-bin.nightly."2024-04-07".rustfmt
+          pnpm
           nodejs-slim_22
           nixgl.nixGLMesa
         ];
@@ -40,9 +102,9 @@
         buildInputs = [ gtk3 ];
 
         env = {
-          PKG_CONFIG_PATH="${libsoup.dev}/lib/pkgconfig:${webkitgtk.dev}/lib/pkgconfig";
-          RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library/";
           RUST_BACKTRACE = "full";
+          RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library/";
+          PKG_CONFIG_PATH = "${libsoup.dev}/lib/pkgconfig:${webkitgtk.dev}/lib/pkgconfig";
         };
       };});
   };

@@ -1,18 +1,22 @@
-# run the program
-r *ARG:
-  cargo run -- {{ARG}}
+# start dev window
+dev:
+  dx serve
 
 # cargo build release binary
-cb:
-  cargo build --frozen --release --all-features
+db:
+  dx bundle
 
 # remove the target dir
-cc:
-  cargo clean
+dc:
+  dx clean
+
+# format rsx files
+df:
+  dx fmt
 
 # nix build release derivative
 nb:
-  nix build |& nom
+  nix build --log-format internal-json |& nom --json
 
 # nix update flake.lock
 nu:
