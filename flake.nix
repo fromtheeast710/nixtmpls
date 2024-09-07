@@ -31,6 +31,9 @@
         dioxus = {
           path = ./rust/dioxus;
           description = "Flake for Dioxus development";
+          welcomeText = ''
+          # Note that Dioxus is still in alpha
+          '';
         };
       };
       python = {
