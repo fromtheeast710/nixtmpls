@@ -23,10 +23,14 @@
           # Template Tauri project
           ## Usage
 
-          After initialization, use pnpm to setup Tauri+Svelte
+          After initialization, use pnpm to setup Tauri+Svelte project.
 
-          ## Build will be available soon
+          ## Build uses 'cargo-tauri.hook' which is not yet merged into nixpkgs
           '';
+        };
+        dioxus = {
+          path = ./rust/dioxus;
+          description = "Flake for Dioxus development";
         };
       };
       python = {
@@ -37,7 +41,7 @@
           # Template ROS Humble project
           ## Source
 
-          Modified from `https://github.com/lopsided98/nix-ros-overlay/`
+          Modified from `https://github.com/lopsided98/nix-ros-overlay/`.
           '';
         };
         jupyter = {
