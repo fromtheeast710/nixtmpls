@@ -23,9 +23,9 @@
     , stdenv
     , pnpm
     , darwin
-    , libsoup
+    , libsoup_3
     , openssl
-    , webkitgtk
+    , webkitgtk_4_1
     , pkg-config
     , cargo-tauri
     , nodejs-slim_22
@@ -61,8 +61,8 @@
       buildInputs =
         [ openssl ]
         ++ lib.optionals stdenv.isLinux [
-          libsoup
-          webkitgtk
+          libsoup_3
+          webkitgtk_4_1
           glib-networking
         ]
         ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [
@@ -104,7 +104,8 @@
         env = {
           RUST_BACKTRACE = "full";
           RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library/";
-          PKG_CONFIG_PATH = "${libsoup.dev}/lib/pkgconfig:${webkitgtk.dev}/lib/pkgconfig";
+          GIO_MODULE_DIR = "${glib-networking}/lib/gio/modules/";
+          PKG_CONFIG_PATH = "${libsoup_3.dev}/lib/pkgconfig:${webkitgtk_4_1.dev}/lib/pkgconfig";
         };
       };});
   };
