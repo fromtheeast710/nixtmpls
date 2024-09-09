@@ -106,6 +106,8 @@
           RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library/";
           GIO_MODULE_DIR = "${glib-networking}/lib/gio/modules/";
           PKG_CONFIG_PATH = "${libsoup_3.dev}/lib/pkgconfig:${webkitgtk_4_1.dev}/lib/pkgconfig";
+          LOCALE_ARCHIVE = if system == "x86_64-linux" 
+            then "${glibcLocales}/lib/locale/locale-archive" else "";
         };
       };});
   };
