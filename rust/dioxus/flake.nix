@@ -66,8 +66,8 @@
       env = {
         RUST_SRC_PATH="${rust}/lib/rustlib/src/rust/library";
         PKG_CONFIG_PATH="${webkitgtk_4_1.dev}/lib/pkgconfig";
-          LOCALE_ARCHIVE = if system == "x86_64-linux" 
-            then "${glibcLocales}/lib/locale/locale-archive" else "";
+        LOCALE_ARCHIVE = if system == "x86_64-linux"
+          then "${glibcLocales}/lib/locale/locale-archive" else "";
       };
     };
   };
