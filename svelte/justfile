@@ -1,14 +1,14 @@
 # compile and run dev build locally
-d:
+dev:
   pnpm dev
 
 # install new dev dependency
-i:
-	pnpm install -D --
+i *PKGS:
+	pnpm install -D -- {{PKGS}}
 
 # uninstall dependancy
-r:
-	pnpm rm --
+r *PKGS:
+	pnpm rm -- {{PKGS}}
 
 # list installed dependancy
 l:
@@ -16,7 +16,7 @@ l:
 
 # update
 u:
-	pnpm update
+	pnpm update && nix flake update
 
 # build release
 b:
