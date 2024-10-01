@@ -1,0 +1,11 @@
+# build and run program
+r:
+  dune exec NameOfPkg
+
+# run and watch for changes
+w:
+  dune exec NameOfPkg -w
+
+# clean build dir
+c:
+  dune clean

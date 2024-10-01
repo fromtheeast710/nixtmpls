@@ -12,7 +12,9 @@
       ocaml
       ocamlformat
     ] ++ (with ocamlPackages; [
+      utop
       dune_3
+      ocaml-lsp
     ]);
   };};
 }
