@@ -3,7 +3,7 @@
 
   inputs = {
     ros-overlay.url = "github:lopsided98/nix-ros-overlay/master";
-    nixpkgs.follows = "nix-ros-overlay/nixpkgs";
+    nixpkgs.follows = "ros-overlay/nixpkgs";
   };
 
   outputs = { self, ros-overlay, nixpkgs }:
@@ -13,16 +13,16 @@
           inherit system;
           overlays = [ ros-overlay.overlays.default ];
         };
-      in with pkgs; { devShells.default = pkgs.mkShell {
-        name = "Example project";
-        packages = [
-          colcon
+      in with pkgs; {
+        devShells.default = pkgs.mkShell {
+          packages = [
+            colcon
 
-          (with rosPackages.humble; buildEnv {
-            paths = [
-              ros-core
-              rqt-gui
-            ];})
-        ] ++ (with python3Packages; [ numpy ]);
-      };});
+            (with rosPackages.humble; buildEnv {
+              paths = [
+                ros-core
+                rqt-gui
+              ];})
+          ] ++ (with python3Packages; [ numpy ]);
+        };});
 }

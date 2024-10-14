@@ -24,8 +24,6 @@
           ## Usage
 
           After initialization, use pnpm to setup Tauri+Svelte project.
-
-          ## Build uses 'cargo-tauri.hook' which is not yet merged into nixpkgs
           '';
         };
         dioxus = {
