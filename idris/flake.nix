@@ -13,8 +13,8 @@
     with pkgs; {
       devShells.${system}.default = mkShell {
         packages = [
-          typst
-          typstyle
+          rlwrap
+          idris2
         ];
 
         shellHook = "typst c ./NOTE.typ && clear";

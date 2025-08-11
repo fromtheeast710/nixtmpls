@@ -6,40 +6,51 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, rust-overlay }: let
+  outputs = {
+    self,
+    nixpkgs,
+    rust-overlay,
+  }: let
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ rust-overlay.overlays.default ];
+      overlays = [rust-overlay.overlays.default];
     };
 
-    rust = pkgs.rust-bin.fromRustupToolchainFile ./Toolchain.toml;
+    rust = pkgs.rust-bin.stable.latest.minimal.override {
+      extensions = ["rust-src"];
+    };
 
-    builder = { lib, rustPlatform }: let
+    builder = {
+      lib,
+      rustPlatform,
+    }: let
       toml = (lib.importTOML ./Cargo.toml).package;
-    in rustPlatform.buildRustPackage {
-      inherit (toml) version;
+    in
+      rustPlatform.buildRustPackage {
+        inherit (toml) version;
 
-      pname = toml.name;
-      src = ./.;
-      cargoLock.lockFile = ./Cargo.lock;
+        pname = toml.name;
+        src = ./.;
+        cargoLock.lockFile = ./Cargo.lock;
 
-      meta.mainProgram = "NameOfPkg";
-    };
-  in with pkgs; {
-    packages.${system} = {
-      NameOfPkg = callPackage builder { };
-      default = self.packages.${system}.NameOfPkg;
-    };
+        meta.mainProgram = "NameOfPkg";
+      };
+  in
+    with pkgs; {
+      packages.${system} = {
+        NameOfPkg = callPackage builder {};
+        default = self.packages.${system}.NameOfPkg;
+      };
 
-    devShells.${system}.default = mkShell {
-      packages = [
-        rust
-        rust-analyzer-unwrapped
-        rust-bin.nightly."2024-04-07".rustfmt
-      ];
-      RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library";
+      devShells.${system}.default = mkShell {
+        packages = [
+          rust
+          rust-analyzer-unwrapped
+          rust-bin.nightly."2024-04-07".rustfmt
+        ];
+        RUST_SRC_PATH = "${rust}/lib/rustlib/src/rust/library";
+      };
     };
-  };
 }

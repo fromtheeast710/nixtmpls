@@ -6,31 +6,31 @@
           path = ./rust/min;
           description = "Minimal Flake for Rust development";
           welcomeText = ''
-          # Minimal Cargo project
-          ## Usage
+            # Minimal Cargo project
+            ## Usage
 
-          After initialization, execute:
+            After initialization, execute:
 
-          ```
-          cargo init
-          ```
+            ```
+            cargo init
+            ```
           '';
         };
         tauri = {
           path = ./rust/tauri;
           description = "Flake for Tauri development";
           welcomeText = ''
-          # Template Tauri project
-          ## Usage
+            # Template Tauri project
+            ## Usage
 
-          After initialization, use pnpm to setup Tauri+Svelte project.
+            After initialization, use pnpm to setup Tauri+Svelte project.
           '';
         };
         dioxus = {
           path = ./rust/dioxus;
           description = "Flake for Dioxus development";
           welcomeText = ''
-          # Note that Dioxus is still in alpha
+            # Note that Dioxus is still in alpha
           '';
         };
       };
@@ -39,10 +39,10 @@
           path = ./python/ros;
           description = "Nix Flake for ROS Humble development";
           welcomeText = ''
-          # Template ROS Humble project
-          ## Source
+            # Template ROS Humble project
+            ## Source
 
-          Modified from `https://github.com/lopsided98/nix-ros-overlay/`.
+            Modified from `https://github.com/lopsided98/nix-ros-overlay/`.
           '';
         };
         jupyter = {
@@ -54,10 +54,10 @@
         path = ./svelte;
         description = "Flake for Svelte development";
         welcomeText = ''
-        # Svelte project
-        ## Usage
+          # Svelte project
+          ## Usage
 
-        Use `pnpm` to setup the project.
+          Use `pnpm` to setup the project.
         '';
       };
       typst = {
