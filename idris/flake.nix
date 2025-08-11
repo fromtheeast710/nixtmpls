@@ -1,5 +1,5 @@
 {
-  description = "Nix Flake for Typst note-taking";
+  description = "Nix Flake for Idris 2 development";
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 

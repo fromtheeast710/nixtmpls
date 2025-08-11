@@ -68,6 +68,10 @@
         path = ./ocaml;
         description = "Flake for OCaml development";
       };
+      idris = {
+        path = ./idris;
+        description = "Flake for Idris 2 development";
+      };
     };
   };
 }
