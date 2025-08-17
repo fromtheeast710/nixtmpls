@@ -16,8 +16,6 @@
           rlwrap
           idris2
         ];
-
-        shellHook = "typst c ./NOTE.typ && clear";
       };
     };
 }
